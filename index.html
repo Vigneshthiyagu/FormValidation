@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: palegreen;
+            display: grid;
+            place-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 500px;
+            padding: 10px;
+            border-radius: 3px;
+        }
+
+        .container h3 {
+            font-weight: 500;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .form {
+            padding: 30px 40px;
+        }
+
+        .form-group {
+            color: #333;
+            margin-bottom: 5px;
+            padding-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3c40c6;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            border: 2px solid #aaa;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            outline: none;
+            border-radius: 3px;
+        }
+
+        .form-group p {
+            font-size: 11px;
+            margin-top: 5px;
+            visibility: hidden;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #3c40c6;
+            color: #fff;
+            background-color: #3c40c6;
+            text-transform: uppercase;
+            font-weight: 500;
+            border-radius: 3px;
+        }
+
+        .form-group.error p {
+            color: #f53b57;
+            visibility: visible;
+        }
+
+        .form-group.error input {
+            border-color: #f53b57;
+        }
+
+        .form-group.success input {
+            border-color: #05c46b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="#" id="form" class="form" autocomplete="off">
+            <h3>Registration Form</h3>
+
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" id="username" data-name="User Name" placeholder="Enter User Name" />
+                <p>Error Message</p>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" data-name="Email Id" placeholder="Enter Email Id" />
+                <p>Error Message</p>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" data-name="Password" />
+                <p>Error Message</p>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" id="password2" placeholder="Enter Confirm Password"
+                    data-name="Confirm Password" />
+                <p>Error Message</p>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById("form");
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const password2 = document.getElementById("password2");
+
+        String.prototype.isEmail = function () {
+            return !!this.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+        };
+
+        String.prototype.isAlpha = function () {
+            return !!this.match(/^[a-zA-Z]*$/);
+        };
+
+        function checkRequired(inputs) {
+            inputs.forEach((input) => {
+                if (input.value.trim() === "") {
+                    //Error
+                    errorInput(input, `${getName(input)} is Required`);
+                } else {
+                    //Success
+                    successInput(input);
+                }
+            });
+        }
+        function getName(input) {
+            //return input.id;
+            return input.getAttribute("data-name");
+        }
+        function errorInput(input, message) {
+            const formGroup = input.parentElement;
+            formGroup.className = "form-group error";
+            const p = formGroup.querySelector("p");
+            p.innerHTML = message;
+        }
+        function successInput(input) {
+            const formGroup = input.parentElement;
+            formGroup.className = "form-group success";
+            const p = formGroup.querySelector("p");
+            p.innerHTML = "";
+        }
+
+        function checkLength(input, min, max) {
+            const data = input.value.trim().length;
+            if (data < min) {
+                errorInput(input, `${getName(input)} must be aleast greater than ${min} characters`);
+            } else if (data > max) {
+                errorInput(input, `${getName(input)} must be aleast lesser than ${max} characters`);
+            } else {
+                successInput(input);
+            }
+        }
+
+        function checkConfirmPassword(password, password2) {
+            if (password.value != password2.value) {
+                errorInput(password2, `${getName(password2)}  does not match`);
+            }
+        }
+
+        function checkEmail(input) {
+            if (!input.value.trim().isEmail()) {
+                errorInput(input, `This is not an valid email address`);
+            }
+        }
+        function checkAlpha(input) {
+            if (!input.value.trim().isAlpha()) {
+                errorInput(input, `${getName(input)}  Must be Alphabets`);
+            }
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            checkRequired([username, email, password, password2]);
+            checkLength(username, 5, 10);
+            checkLength(password, 5, 10);
+            checkConfirmPassword(password, password2);
+            checkEmail(email);
+            checkAlpha(username);
+        });
+    </script>
+</body>
+
+</html>
