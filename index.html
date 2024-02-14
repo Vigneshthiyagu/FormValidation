@@ -1,211 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form Validation</title>
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800&display=swap");
+    <title>Test-1</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-image: url("https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1486&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      background-repeat: no-repeat;
+      width: 70%;
+      background-position: center;
+      font-family: bold;
+    }
+    h3 {
+      background-color: #00ccff;
+      color: #ffffff;
+      margin: 0 auto;
+      text-align: center;
+      width: 50%;
+      font-family: Verdana;
+      padding: 5px;
+      border-radius: 6px;
+    }
+    table,
+    tr,
+    td {
+      width: 50%;
+      border: solid 1px black;
+      margin: 0 auto;
+      border-spacing: 1px;
+      border-radius: 6px;
+      color: #009900;
+      background-color: #f2f2f2;
+      padding: 1px;
+    }
+    #submit {
+      color: #ffffff;
+      background-color: #00ccff;
+      margin: 0 auto;
+      padding: 5px;
+      width: 100%;
+      font-family: Verdana;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    #result {
+      font-size: 20px;
+      text-align: center;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+  </style>
+  <body>
+    <!-- Question-1 -->
+    <!-- <div>
+      <label for="inputtext">Enter The Text</label><br />
+      <input type="text" name="inputtext" id="inputtext" /><br />
+      <button onclick="countbtn()">Click</button>
+    </div> -->
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
+    <!-- Question-2 -->
+    <h3>Your Admission</h3>
+    <form onsubmit="event.preventDefault();display()">
+      <table>
+        <tr>
+          <td><label for="sname">Student Name</label></td>
+          <td>
+            <input
+              type="text"
+              id="sname"
+              placeholder="Enter the student name"
+              required
+              pattern="[a-zA-Z0-9]+"
+              value="helo"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Phone Number</label></td>
+          <td>
+            <input
+              type="text"
+              id="phno"
+              placeholder="Enter the Phone Number"
+              required
+              pattern="[789][0-9]{9}"
+              value="8765356745"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Admission Id</label></td>
+          <td>
+            <input
+              type="number"
+              id="aid"
+              placeholder="Enter the Admission Id"
+              required
+              value="7889"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="admissiondate"> Date of Admission</label></td>
+          <td>
+            <input type="date" id="admissiondate" required value="2000-05-05" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="deptname"> Department Name</label></td>
+          <td>
+            <select name="deptname" id="deptname">
+              <option value="eee">EEE</option>
+              <option value="ece">ECE</option>
+              <option value="cse">CSE</option>
+              <option value="mech">MECH</option>
+              <option value="civil">CIVIL</option>
+              <option value="it">IT</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label> Prefer College Hostel</label></td>
+          <td>
+            <input type="radio" id="yes" name="preferHostel" value="YES" />
+            <label for="yes"> YES</label>
+            <input type="radio" id="no" name="preferHostel" value="NO" true />
+            <label for="no">NO</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="firstgraduate"> First Graduate</label></td>
+          <td>
+            <input
+              type="checkbox"
+              id="firstGraduate"
+              name="firstGraduate"
+              value="YEs"
+            />
+            <label for="firstgraduate"> Click if you are first graduate</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input
+              type="submit"
+              id="submit"
+              name="submit"
+              value="CONFIRM ADMISSION"
+            />
+          </td>
+        </tr>
+      </table>
 
-        body {
-            width: 100vw;
-            height: 100vh;
-            background-color: palegreen;
-            display: grid;
-            place-items: center;
-        }
+      <div id="result">lo</div>
+    </form>
 
-        .container {
-            background-color: #fff;
-            width: 500px;
-            padding: 10px;
-            border-radius: 3px;
-        }
-
-        .container h3 {
-            font-weight: 500;
-            text-align: center;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .form {
-            padding: 30px 40px;
-        }
-
-        .form-group {
-            color: #333;
-            margin-bottom: 5px;
-            padding-bottom: 10px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #3c40c6;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            border: 2px solid #aaa;
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            outline: none;
-            border-radius: 3px;
-        }
-
-        .form-group p {
-            font-size: 11px;
-            margin-top: 5px;
-            visibility: hidden;
-        }
-
-        .form button {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #3c40c6;
-            color: #fff;
-            background-color: #3c40c6;
-            text-transform: uppercase;
-            font-weight: 500;
-            border-radius: 3px;
-        }
-
-        .form-group.error p {
-            color: #f53b57;
-            visibility: visible;
-        }
-
-        .form-group.error input {
-            border-color: #f53b57;
-        }
-
-        .form-group.success input {
-            border-color: #05c46b;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <form action="#" id="form" class="form" autocomplete="off">
-            <h3>Registration Form</h3>
-
-            <div class="form-group">
-                <label for="username">User Name</label>
-                <input type="text" id="username" data-name="User Name" placeholder="Enter User Name" />
-                <p>Error Message</p>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" data-name="Email Id" placeholder="Enter Email Id" />
-                <p>Error Message</p>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password" data-name="Password" />
-                <p>Error Message</p>
-            </div>
-            <div class="form-group">
-                <label for="password2">Confirm Password</label>
-                <input type="password" id="password2" placeholder="Enter Confirm Password"
-                    data-name="Confirm Password" />
-                <p>Error Message</p>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
     <script>
-        const form = document.getElementById("form");
-        const username = document.getElementById("username");
-        const email = document.getElementById("email");
-        const password = document.getElementById("password");
-        const password2 = document.getElementById("password2");
+      // Question-1
+      //   var countbtn = () => {
+      //     var a = document.querySelector("#inputtext").value;
+      //     if (isNaN(a)) {
+      //       if (a.length <= 7) {
+      //         alert("number of consonants 7");
+      //       } else {
+      //         alert("Above 7 consonants");
+      //       }
+      //     } else {
+      //       if (a.length == 0) {
+      //         alert("No Consonants");
+      //       } else {
+      //         alert("Its Number");
+      //       }
+      //     }
+      //   };
 
-        String.prototype.isEmail = function () {
-            return !!this.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
-        };
+      //   Question-2
+      function display() {
+        var name = document.getElementById("sname").value;
+        var department = document.getElementById("deptname").value;
+        let z = department.toUpperCase();
+        var fgra = document.getElementById("firstGraduate").value;
+        var chk = document.getElementById("yes").checked;
 
-        String.prototype.isAlpha = function () {
-            return !!this.match(/^[a-zA-Z]*$/);
-        };
+        var afess = 30000;
 
-        function checkRequired(inputs) {
-            inputs.forEach((input) => {
-                if (input.value.trim() === "") {
-                    //Error
-                    errorInput(input, `${getName(input)} is Required`);
-                } else {
-                    //Success
-                    successInput(input);
-                }
-            });
-        }
-        function getName(input) {
-            //return input.id;
-            return input.getAttribute("data-name");
-        }
-        function errorInput(input, message) {
-            const formGroup = input.parentElement;
-            formGroup.className = "form-group error";
-            const p = formGroup.querySelector("p");
-            p.innerHTML = message;
-        }
-        function successInput(input) {
-            const formGroup = input.parentElement;
-            formGroup.className = "form-group success";
-            const p = formGroup.querySelector("p");
-            p.innerHTML = "";
-        }
+        let cfees;
+        var hfess = 75000;
+        // Check Hostel Or Not
+        if (chk) {
+          // Department
+          if (z === "EEE" || z === "CSE" || z === "IT") {
+            var tfess = 45000;
 
-        function checkLength(input, min, max) {
-            const data = input.value.trim().length;
-            if (data < min) {
-                errorInput(input, `${getName(input)} must be aleast greater than ${min} characters`);
-            } else if (data > max) {
-                errorInput(input, `${getName(input)} must be aleast lesser than ${max} characters`);
-            } else {
-                successInput(input);
-            }
+            cfees = afess + tfess + hfess;
+          } else if (z === "ECE" || z === "CIVIL") {
+            var tfess = 50000;
+            cfees = afess + tfess + hfess;
+          } else {
+            var tfess = 50000;
+            cfees = afess + tfess + hfess;
+          }
         }
+        // Hostel Not
+        else {
+          // Department
+          if (z === "EEE" || z === "CSE" || z === "IT") {
+            var tfess = 45000;
 
-        function checkConfirmPassword(password, password2) {
-            if (password.value != password2.value) {
-                errorInput(password2, `${getName(password2)}  does not match`);
-            }
+            cfees = afess + tfess;
+          } else if (z === "ECE" || z === "CIVIL") {
+            var tfess = 50000;
+            cfees = afess + tfess;
+          } else {
+            var tfess = 50000;
+            cfees = afess + tfess;
+          }
+        }
+        // Check Hostel Or Not End
+
+        let finalFess;
+        var chkBox = document.getElementById("firstGraduate").checked;
+
+        if (chkBox) {
+          finalFess = cfees - 20000;
         }
 
-        function checkEmail(input) {
-            if (!input.value.trim().isEmail()) {
-                errorInput(input, `This is not an valid email address`);
-            }
-        }
-        function checkAlpha(input) {
-            if (!input.value.trim().isAlpha()) {
-                errorInput(input, `${getName(input)}  Must be Alphabets`);
-            }
-        }
-
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            checkRequired([username, email, password, password2]);
-            checkLength(username, 5, 10);
-            checkLength(password, 5, 10);
-            checkConfirmPassword(password, password2);
-            checkEmail(email);
-            checkAlpha(username);
-        });
+        document.getElementById("result").innerHTML = `<ul>
+            <li>Name : ${name}</li>
+            <li>Admission Fess : ${afess}</li>
+            <li>Tution Fess : ${tfess}</li>
+            ${chk ? ` <li>Hostel Fess : ${hfess}</li>` : ``}
+            <li>Total Fess : ${finalFess || cfees}</li>
+            </ul>`;
+      }
     </script>
-</body>
-
+  </body>
 </html>
