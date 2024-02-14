@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      let a = "12 + 3 * 5";
+      let splitArray = a.split(" ");
+      console.log(splitArray);
+      let number = [];
+      let operation = [];
+      splitArray.forEach((n) => {
+        if (!isNaN(parseInt(n))) {
+          number.push(parseInt(n));
+        } else {
+          operation.push(n);
+        }
+      });
+      console.log(number);
+      console.log(operation);
+      let result = number.shift();
+      operation.forEach((n) => {
+        let num = number.shift();
+        switch (n) {
+          case "+":
+            console.log(result);
+            console.log(num);
+            result += num;
+            console.log(result);
+            break;
+          case "-":
+            result -= num;
+            break;
+          case "*":
+            console.log(result);
+            console.log(num);
+            result *= num;
+            break;
+          case "/":
+            result /= num;
+            break;
+          default:
+            console.log("Invalid Operation");
+        }
+      });
+      console.log(result);
+      // Question-2
+
+      //   function addToCart(id) {
+      //     var a = document.querySelector('.product[data-id="' + id + '"]');
+      //     var name = a.querySelector("p").textContent;
+      //     var price = parseFloat(a.getAttribute("data-price"));
+      //     alert(name);
+      //     alert(price);
+      //   }
+
+      //   function display(id){
+      //       var str= document.querySelector('#input').textContent;
+      //       var location=str.substring(0,3);
+      //           var year=parseInt(str.substring(3,5));
+      //           var course= str.substring(5,9);
+      //           var roll=parseInt(str.substring(9));
+      //           alert("Location:"+location);
+      //           alert("Starting year:"+year);
+      //           alert("Learning path:"+course);
+      //           alert("Cohort Number:"+roll);
+
+      //   }
+    </script>
+  </head>
+  <body>
+    <!-- Question-2 -->
+    <!-- <div class="product" data-id="1" data-price="90.12">
+      <h1>01</h1>
+      <p>honda</p>
+      <button onclick="addToCart(1)">Click</button>
+    </div>
+    <div class="product" data-id="2" data-price="68.8">
+      <h1>02</h1>
+      <p>yamaha</p>
+      <button onclick="addToCart(2)">Click</button>
+    </div> -->
+
+    <!-- Question-3 -->
+
+    <!-- <div id="input" name="cohort code">TRI24MERN012</div>
+    <button onclick="display(1)">Click</button> -->
+  </body>
+</html>
