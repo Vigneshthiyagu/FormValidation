@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>ITC Task-1</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <label for="" id="heading">Welcome to Adi-Online Shopping</label>
+    <form onsubmit="event.preventDefault();calculateFinalAmount()">
+      <table id="Ebill">
+        <tr>
+          <td><label for="cname">Customer Name</label></td>
+          <td>
+            <input type="text" id="cname" placeholder="Enter Customer Name" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cname">Mobile Number</label></td>
+          <td>
+            <input
+              type="text"
+              id="pheno"
+              placeholder="Enter Your Mobile No"
+              pattern="[789][0-9]{9}"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cemail">Email Id</label></td>
+          <td>
+            <input
+              type="email"
+              id="cemail"
+              placeholder="Enter Your Email"
+              pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="caddress">Billing Address</label></td>
+          <td>
+            <textarea
+              name="caddress"
+              id="caddress"
+              cols="30"
+              rows="5"
+              placeholder="Enter Your Address"
+            ></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cproduct">Choose Product</label></td>
+          <td>
+            <select name="cproduct" id="cproduct">
+              <option value="tv" id="1">Tv</option>
+              <option value="fridge" id="2">Refridgerator</option>
+              <option value="mobile" id="3">Mobile</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cquantity">Enter Quantity</label></td>
+          <td>
+            <input
+              type="number"
+              name="cquantity"
+              id="cquantity"
+              placeholder="Enter Quantity"
+              min="1"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cpayment">Payment Mode</label></td>
+          <td>
+            <select name="cpayment" id="cpayment">
+              <option value="cash" id="1">Cash On Delivery</option>
+              <option value="debit" id="2">Debit Card</option>
+              <option value="UPI" id="3">UPI Transfer</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="cbag">Big Data</label></td>
+          <td>
+            <input type="number" name="cbag" id="cbag" min="1" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="coupon">Coupon Code</label></td>
+          <td>
+            <input
+              type="text"
+              id="coupon"
+              name="coupon"
+              pattern="ADI\d{4}"
+              title="Coupon Code must be in the format ADI followed by 4 digits. Example: ADI1234"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="delivery">Delivery Option</label></td>
+          <td>
+            <input
+              type="radio"
+              id="express"
+              name="delivery"
+              value="Express"
+              required
+            />
+            <label for="express">Express</label><br />
+
+            <input
+              type="radio"
+              id="standard"
+              name="delivery"
+              value="Standard"
+              required
+            />
+            <label for="standard">Standard</label><br />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" />
+            <!-- onchange="activateButton(this)" -->
+            <label for="agreeTerms"
+              >I agree to Adi Electronics' Terms and Conditions.</label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="Submit" id="submitButton" disabled />
+          </td>
+          <td>
+            <input
+              type="reset"
+              value="Reset"
+              id="resetButton"
+              onclick="resetForm()"
+            />
+          </td>
+        </tr>
+      </table>
+      <div id="result"></div>
+    </form>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>
