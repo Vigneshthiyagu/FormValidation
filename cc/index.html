@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test-1</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-image: url("https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1486&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      background-repeat: no-repeat;
+      width: 90%;
+      background-position: center;
+      font-family: bold;
+    }
+    h3 {
+      background-color: #00ccff;
+      color: #ffffff;
+      margin: 0 auto;
+      text-align: center;
+      width: 50%;
+      font-family: Verdana;
+      padding: 5px;
+      border-radius: 6px;
+    }
+    table,
+    tr,
+    td {
+      width: 50%;
+      border: solid 1px black;
+      margin: 0 auto;
+      border-spacing: 1px;
+      border-radius: 6px;
+      color: #009900;
+      background-color: #f2f2f2;
+      padding: 1px;
+    }
+    #submit {
+      color: #ffffff;
+      background-color: #00ccff;
+      margin: 0 auto;
+      padding: 5px;
+      width: 100%;
+      font-family: Verdana;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    #result {
+      font-size: 20px;
+      text-align: center;
+      margin: 0 auto;
+      background-color: #fff;
+    }
+  </style>
+  <body>
+    <!-- Question-2 -->
+    <h3>Your Admission</h3>
+    <form onsubmit="event.preventDefault();display()">
+      <table>
+        <tr>
+          <td><label for="sname">Student Name</label></td>
+          <td>
+            <input
+              type="text"
+              id="sname"
+              placeholder="Enter the student name"
+              required
+              pattern="[a-zA-Z]+"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Phone Number</label></td>
+          <td>
+            <input
+              type="text"
+              id="phno"
+              placeholder="Enter the Phone Number"
+              required
+              pattern="[789][0-9]{9}"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label>Admission Id</label></td>
+          <td>
+            <input
+              type="number"
+              id="aid"
+              placeholder="Enter the Admission Id"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="admissiondate"> Date of Admission</label></td>
+          <td>
+            <input type="date" id="admissiondate" required />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="deptname"> Department Name</label></td>
+          <td>
+            <select name="deptname" id="deptname">
+              <option value="eee">EEE</option>
+              <option value="ece">ECE</option>
+              <option value="cse">CSE</option>
+              <option value="mech">MECH</option>
+              <option value="civil">CIVIL</option>
+              <option value="it">IT</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label> Prefer College Hostel</label></td>
+          <td>
+            <input type="radio" id="yes" name="preferHostel" value="YES" />
+            <label for="yes"> YES</label>
+            <input type="radio" id="no" name="preferHostel" value="NO" true />
+            <label for="no">NO</label>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="firstgraduate"> First Graduate</label></td>
+          <td>
+            <input
+              type="checkbox"
+              id="firstGraduate"
+              name="firstGraduate"
+              value="YEs"
+            />
+            <label for="firstgraduate"> Click if you are first graduate</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input
+              type="submit"
+              id="submit"
+              name="submit"
+              value="CONFIRM ADMISSION"
+            />
+          </td>
+        </tr>
+      </table>
+
+      <div id="result"></div>
+    </form>
+
+    <script>
+      //   Question-2
+      function display() {
+        var name = document.getElementById("sname").value;
+        var department = document.getElementById("deptname").value;
+        let z = department.toUpperCase();
+        var fgra = document.getElementById("firstGraduate").value;
+        var chk = document.getElementById("yes").checked;
+
+        var afess = 30000;
+
+        let cfees;
+        var hfess = 75000;
+        // Check Hostel Or Not
+        if (chk) {
+          // Department
+          if (z === "EEE" || z === "CSE" || z === "IT") {
+            var tfess = 45000;
+
+            cfees = afess + tfess + hfess;
+          } else if (z === "ECE" || z === "CIVIL") {
+            var tfess = 50000;
+            cfees = afess + tfess + hfess;
+          } else {
+            var tfess = 50000;
+            cfees = afess + tfess + hfess;
+          }
+        }
+        // Hostel Not
+        else {
+          // Department
+          if (z === "EEE" || z === "CSE" || z === "IT") {
+            var tfess = 45000;
+
+            cfees = afess + tfess;
+          } else if (z === "ECE" || z === "CIVIL") {
+            var tfess = 50000;
+            cfees = afess + tfess;
+          } else {
+            var tfess = 50000;
+            cfees = afess + tfess;
+          }
+        }
+        // Check Hostel Or Not End
+
+        let finalFess;
+        var chkBox = document.getElementById("firstGraduate").checked;
+
+        if (chkBox) {
+          finalFess = cfees - 20000;
+        }
+
+        document.getElementById("result").innerHTML = `<ul>
+            <li>Name : ${name}</li>
+            <li>Admission Fess : ${afess}</li>
+            <li>Tution Fess : ${tfess}</li>
+            ${chk ? ` <li>Hostel Fess : ${hfess}</li>` : ``}
+            <li>Total Fess : ${finalFess || cfees}</li>
+            </ul>`;
+      }
+    </script>
+  </body>
+</html>

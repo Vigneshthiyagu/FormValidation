@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consonent Count</title>
+  </head>
+  <body>
+    <label>Enter the text</label><br />
+    <input
+      type="text"
+      id="consonent"
+      name="consonent"
+      placeholder="type here..."
+    /><br />
+    <button onclick="countBtn()">OK</button>
+  </body>
+  <script>
+    function countBtn() {
+      let count = document.getElementById("consonent").value;
+      let result = count.replace(/[^bcdfghjklmnpqrstvwxy]/gi, "");
+      let con = result.length;
+      if (con === 0) {
+        alert(`No consonents`);
+      } else {
+        alert(`Number of consonents: ${con}`);
+      }
+    }
+  </script>
+</html>
